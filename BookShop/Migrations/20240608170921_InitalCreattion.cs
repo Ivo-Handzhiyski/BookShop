@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BookShop.Migrations
 {
     /// <inheritdoc />
-    public partial class initCreate : Migration
+    public partial class InitalCreattion : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -73,7 +73,7 @@ namespace BookShop.Migrations
                 {
                     GenreId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    GenreName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    GenreName = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -84,7 +84,8 @@ namespace BookShop.Migrations
                 name: "Publishers",
                 columns: table => new
                 {
-                    PublisherId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    PublisherId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     PublisherName = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -221,15 +222,14 @@ namespace BookShop.Migrations
                 name: "Books",
                 columns: table => new
                 {
-                    ISBN = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ISBN = table.Column<int>(type: "int", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false),
                     PublicationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Edition = table.Column<int>(type: "int", nullable: false),
                     AvailableQuantity = table.Column<int>(type: "int", nullable: false),
                     AuthorID = table.Column<int>(type: "int", nullable: false),
-                    PublisherId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    PublisherId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -387,6 +387,12 @@ namespace BookShop.Migrations
                 name: "IX_Books_PublisherId",
                 table: "Books",
                 column: "PublisherId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Genres_GenreName",
+                table: "Genres",
+                column: "GenreName",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrderDetails_ISBN",

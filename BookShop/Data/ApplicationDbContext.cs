@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Emit;
 
 namespace BookShop.Data
 {
@@ -32,6 +33,14 @@ namespace BookShop.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            builder.Entity<Genre>()
+                .HasIndex(g => g.GenreName)
+                .IsUnique();
+
+            builder.Entity<Book>()
+                .Property(b => b.ISBN)
+                .ValueGeneratedNever();
         }
     }
 }

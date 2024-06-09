@@ -17,7 +17,7 @@ namespace BookShop.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.16")
+                .HasAnnotation("ProductVersion", "7.0.18")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -42,10 +42,7 @@ namespace BookShop.Migrations
             modelBuilder.Entity("BookShop.Models.Book", b =>
                 {
                     b.Property<int>("ISBN")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ISBN"));
 
                     b.Property<int>("AuthorID")
                         .HasColumnType("int");
@@ -62,9 +59,8 @@ namespace BookShop.Migrations
                     b.Property<DateTime>("PublicationDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("PublisherId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("PublisherId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -113,9 +109,12 @@ namespace BookShop.Migrations
 
                     b.Property<string>("GenreName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("GenreId");
+
+                    b.HasIndex("GenreName")
+                        .IsUnique();
 
                     b.ToTable("Genres");
                 });
@@ -169,8 +168,11 @@ namespace BookShop.Migrations
 
             modelBuilder.Entity("BookShop.Models.Publisher", b =>
                 {
-                    b.Property<string>("PublisherId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("PublisherId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PublisherId"));
 
                     b.Property<string>("PublisherName")
                         .IsRequired()

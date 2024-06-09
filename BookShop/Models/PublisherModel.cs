@@ -7,7 +7,7 @@ namespace BookShop.Models
     {
         [Required]
         [Key]
-        public string PublisherId { get; set; }
+        public int PublisherId { get; set; }
 
         [Required]
         public string PublisherName { get; set; } 
