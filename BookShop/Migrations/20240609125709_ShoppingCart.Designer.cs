@@ -4,6 +4,7 @@ using BookShop.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookShop.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240609125709_ShoppingCart")]
+    partial class ShoppingCart
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -99,22 +102,28 @@ namespace BookShop.Migrations
                     b.ToTable("BookGenres");
                 });
 
-            modelBuilder.Entity("BookShop.Models.CartItem", b =>
+            modelBuilder.Entity("BookShop.Models.Cart", b =>
                 {
-                    b.Property<int>("ISBN")
-                        .HasColumnType("int")
-                        .HasColumnOrder(0);
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<string>("CartId")
-                        .HasColumnType("nvarchar(450)")
-                        .HasColumnOrder(1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ISBN")
+                        .HasColumnType("int");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.HasKey("ISBN", "CartId");
+                    b.HasKey("Id");
 
-                    b.ToTable("CartItems");
+                    b.HasIndex("ISBN");
+
+                    b.ToTable("Carts");
                 });
 
             modelBuilder.Entity("BookShop.Models.Genre", b =>
@@ -505,15 +514,15 @@ namespace BookShop.Migrations
                     b.Navigation("Genre");
                 });
 
-            modelBuilder.Entity("BookShop.Models.CartItem", b =>
+            modelBuilder.Entity("BookShop.Models.Cart", b =>
                 {
-                    b.HasOne("BookShop.Models.Book", "Book")
+                    b.HasOne("BookShop.Models.Book", "book")
                         .WithMany()
                         .HasForeignKey("ISBN")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Book");
+                    b.Navigation("book");
                 });
 
             modelBuilder.Entity("BookShop.Models.Order", b =>

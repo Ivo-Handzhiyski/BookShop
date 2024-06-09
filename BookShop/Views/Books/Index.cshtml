@@ -56,6 +56,10 @@
                         <a href="@Url.Action("Edit", "Books", new { id = item.ISBN })" class="btn btn-sm btn-warning">Edit</a>
                         <a href="@Url.Action("Details", "Books", new { id = item.ISBN })" class="btn btn-sm btn-info">Details</a>
                         <a href="@Url.Action("Delete", "Books", new { id = item.ISBN })" class="btn btn-sm btn-danger">Delete</a>
+                        <form asp-controller="ShoppingCart" asp-action="AddToCart" method="post">
+                            <input type="hidden" name="isbn" value="@item.ISBN" />
+                            <button type="submit" class="btn btn-sm btn-success">Add to Cart</button>
+                        </form>
                     </td>
                 </tr>
             }

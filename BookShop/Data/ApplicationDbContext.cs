@@ -30,6 +30,8 @@ namespace BookShop.Data
 
         public DbSet<Review> Reviews { get; set; }
 
+        public DbSet<CartItem> CartItems { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

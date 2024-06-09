@@ -10,6 +10,8 @@ namespace BookShop.Models
 
         public int Amount { get; set; }
 
+        public decimal UnitPrice { get; set; }
+
         public int ISBN { get; set; }
 
         [ForeignKey("ISBN")]
