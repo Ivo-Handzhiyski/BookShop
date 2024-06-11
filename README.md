@@ -70,6 +70,8 @@ BookShop is an ASP.NET Core MVC web application for managing a book store. It al
 - `Views`: Contains the Razor views for rendering HTML pages.
 - `ViewModels`: Contains the view models used for passing data between controllers and views.
 
+## Acknowledgements
 - [ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/)
 - [Entity Framework Core](https://docs.microsoft.com/en-us/ef/core/)
 - [Bootstrap](https://getbootstrap.com/)
+= [PagedList](https://github.com/dncuug/X.PagedList)
