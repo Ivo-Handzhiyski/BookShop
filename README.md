@@ -74,4 +74,4 @@ BookShop is an ASP.NET Core MVC web application for managing a book store. It al
 - [ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/)
 - [Entity Framework Core](https://docs.microsoft.com/en-us/ef/core/)
 - [Bootstrap](https://getbootstrap.com/)
-= [PagedList](https://github.com/dncuug/X.PagedList)
+- [PagedList](https://github.com/dncuug/X.PagedList)
